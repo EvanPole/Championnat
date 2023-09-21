@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChampionnatController;
+use App\Http\Controllers\EquipeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::resource('championnat', ChampionnatController::class);
+
+Route::resource('equipe', EquipeController::class);
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('championnat');
 });
