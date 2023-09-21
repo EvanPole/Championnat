@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipe;
+use App\Models\Joueur;
 use Illuminate\Http\Request;
 
 class EquipeController extends Controller
@@ -43,7 +45,11 @@ class EquipeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $equipe = Equipe::Find($id);
+        $player = Joueur::where('equipe_id', $equipe->id)->get();
+
+        return view('equipe.equipe', compact('player'));
+
     }
 
     /**
