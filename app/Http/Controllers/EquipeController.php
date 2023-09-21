@@ -48,7 +48,7 @@ class EquipeController extends Controller
         $equipe = Equipe::Find($id);
         $player = Joueur::where('equipe_id', $equipe->id)->get();
 
-        return view('equipe.equipe', compact('player'));
+        return view('equipe.equipe', compact('player','equipe'));
 
     }
 
@@ -57,7 +57,19 @@ class EquipeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $equipe = Equipe::Find($id);
+
+        $validatedData = $request->all();
+
+
+        $equipe->ville = $validatedData['ville'];
+        $equipe->categorie = $validatedData['categorie'];
+        $equipe->championnat = $validatedData['championnat'];
+
+        $equipe->save();
+
+        return redirect()->route('championnat.index');
+
     }
 
     /**

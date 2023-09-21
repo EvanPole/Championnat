@@ -11,15 +11,20 @@
 </head>
 
 <body>
-    <h1>Liste des joueurs de l'equipe</h1>
-    <a class="btn btn-success" href="{{ route('championnat.index') }}">retour</a>
 
-    <form action="">
-        <input type="text" name="" id="" placeholder="Ville de l'equipe">
-        <input type="text" name="" id="" placeholder="Categorie de l'equipe">
-        <input type="submit" value="">
+    <a class="btn btn-success" href="{{ route('championnat.index') }}">retour</a>
+    <h1>Modification des informationq de l'equipe</h1>
+
+    <form action="{{ route('equipe.update', ['equipe' => $equipe->id]) }}" method="post">
+        @csrf
+        @method('put')
+        <input type="text" name="ville" id="" value="{{ $equipe->ville }}" placeholder="Ville de l'equipe">
+        <input type="text" name="categorie" id="" value="{{ $equipe->categorie }}" placeholder="Categorie de l'equipe">
+        <input type="text" name="championnat" id="" value="{{ $equipe->championnat }}" placeholder="championnat de l'equipe">
+        <input class="btn btn-success" type="submit" value="save">
     </form>
 
+    <h2>Liste des joueurs de l'equipe</h2>
     @forelse ($player as $players)
         <div>
             <p>Nom du joueur : {{ $players->nom }} {{ $players->prenom }} [ {{ $players->tel }} ] mail :
