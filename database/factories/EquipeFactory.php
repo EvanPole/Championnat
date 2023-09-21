@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class JoueursFactory extends Factory
+class EquipeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +16,11 @@ class JoueursFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
-            //
+            'ville' => fake()->city(),
+            'categorie' => fake()->word(),
+            'championnat' => fake()->word(),
         ];
     }
 }
