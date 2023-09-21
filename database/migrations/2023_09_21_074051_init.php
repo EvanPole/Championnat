@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Equipe;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+
+        Schema::create('equipe', function (Blueprint $table) {
+            $table->id();
+            $table->string('ville', 75);
+            $table->string('categorie', 75);
+            $table->string('championnat');
+            $table->timestamps();
+        });
+
+
+
+
     }
 
     /**
