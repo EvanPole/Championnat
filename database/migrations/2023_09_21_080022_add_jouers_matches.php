@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nom', 50);
             $table->string('prenom', 50);
             $table->string('email', 100);
-            $table->string('tel', 15);
+            $table->string('tel', 30);
             $table->unsignedBigInteger('sexe');
             $table->foreignIdFor(Equipe::class);
             $table->timestamps();
