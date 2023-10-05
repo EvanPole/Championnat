@@ -19,7 +19,9 @@ DB_PASSWORD=
 `artisan migrate:install`
 
 ### commandes a effectuer pour les seeder 
-
+</br>
 `artisan db:seed --class=EquipeSeeder`
+</br>
 `artisan db:seed --class=JoueurSeeder`
+</br>
 `artisan db:seed --class=MatcheSeeder`
