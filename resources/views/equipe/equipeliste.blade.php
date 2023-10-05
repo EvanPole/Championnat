@@ -22,7 +22,18 @@
                     </td>
                     <td>{{ $nul[$equipes->id] }}</td>
                     <td>{{ $defaites[$equipes->id] }}</td>
-                    <td><a class="btn btn-secondary" href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">Edit</a>
+                    <td>
+
+                        <form method="POST" action="{{ route('equipe.destroy', ['equipe' => $equipes->id]) }}">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-danger delete-user" value="Supprimer">
+                                <a class="btn btn-secondary" href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">Edit</a>
+                            </div>
+                        </form>
+
                     </td>
                 </tr>
             @empty
@@ -34,4 +45,6 @@
 
         </tbody>
     </table>
+
+    <a class="btn btn-success" href="{{ route('equipe.create') }}">Ajouter une equipe</a>
 @endsection

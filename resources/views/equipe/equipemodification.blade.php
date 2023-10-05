@@ -3,7 +3,7 @@
     {{-- <a class="btn btn-success" href="{{ route('championnat.index') }}">retour</a> --}}
     <h1>Modification des informationq de l'equipe</h1>
 
-    <form action="{{ route('equipe.update', ['equipe' => $equipe->id]) }}" method="post">
+    <form action="{{ route('equipe.store', ['equipe' => $equipe->id]) }}" method="post">
         @csrf
         @method('put')
         <input type="text" name="ville" id="" value="{{ $equipe->ville }}" placeholder="Ville de l'equipe">

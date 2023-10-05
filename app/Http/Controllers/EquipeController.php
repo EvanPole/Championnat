@@ -59,7 +59,7 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        //
+        return view('equipe.equipecreate');
     }
 
     /**
@@ -67,7 +67,19 @@ class EquipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $ville = $data["ville"];
+        $cat = $data["categorie"];
+        $champ = $data["championnat"];
+
+        $equipe = new Equipe;
+        $equipe->ville = $ville;
+        $equipe->categorie = $cat;
+        $equipe->championnat = $champ;
+        $equipe->save();
+
+        return redirect()->route('equipe.index');
     }
 
     /**
@@ -86,7 +98,7 @@ class EquipeController extends Controller
         $equipe = Equipe::Find($id);
         $player = Joueur::where('equipe_id', $equipe->id)->get();
 
-        return view('equipe.equipe', compact('player', 'equipe'));
+        return view('equipe.equipemodification', compact('player', 'equipe'));
     }
 
     /**
@@ -113,6 +125,11 @@ class EquipeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $equipe = Equipe::findOrFail($id);
+
+        $equipe->delete();
+
+        return redirect()->route('equipe.index');
     }
+
 }
