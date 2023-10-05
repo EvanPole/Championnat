@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('categorie', 75);
             $table->string('championnat');
             $table->timestamps();
+            $table->softDeletes();
         });
 
 
