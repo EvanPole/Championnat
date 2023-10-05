@@ -26,8 +26,8 @@ return new class extends Migration
 
         Schema::create('matches', function (Blueprint $table) {
             $table->id();
-            $table->string('domicile', 50);
-            $table->string('visiteur', 50);
+            $table->foreignIdFor(Equipe::class, 'domicile');
+            $table->foreignIdFor(Equipe::class, 'visiteur');
             $table->integer('but_domicile');
             $table->integer('but_visiteur');
             $table->dateTime('date');
