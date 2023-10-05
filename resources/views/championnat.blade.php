@@ -24,9 +24,19 @@
 
             @forelse ($matche as $matches)
                 <tr>
-                    <th scope="row">{{$equipes->ville}}</th>
-                    <td>0</td>
-                    <td>0</td>
+
+                    @foreach ($equipe as $equipes)
+                        @if ($matches->domicile == $equipes->id)
+                            <td>{{ $equipes->ville }}</td>
+                        @endif
+                    @endforeach
+
+                    @foreach ($equipe as $equipes)
+                        @if ($matches->visiteur == $equipes->id)
+                            <td>{{ $equipes->ville }}</td>
+                        @endif
+                    @endforeach
+                    <td>{{ $matches->date }}</td>
                 </tr>
             @empty
 
@@ -54,12 +64,13 @@
 
             @forelse ($equipe as $equipes)
                 <tr>
-                    <th scope="row">{{$equipes->ville}}</th>
+                    <th scope="row">{{ $equipes->ville }}</th>
                     <td>{{ $playerCounts[$equipes->id] }}</td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
-                    <td><a class="btn btn-secondary" href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">Edit</a></td>
+                    <td><a class="btn btn-secondary"
+                            href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">Edit</a></td>
                 </tr>
             @empty
 
