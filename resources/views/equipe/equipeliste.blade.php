@@ -46,5 +46,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success" href="{{ route('equipe.create') }}">Ajouter une equipe</a>
+    <a class="btn btn-success" href="{{ route('equipe.create', ['equipe' => $equipes->id]) }}">Ajouter une nouvelle equipe</a>
 @endsection

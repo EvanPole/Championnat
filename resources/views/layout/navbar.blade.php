@@ -27,6 +27,9 @@
                         <a class="nav-link" href="{{ route('equipe.index') }}">Équipes</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('joueur.index') }}">Joueurs</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Matches</a>
                     </li>
                 </ul>

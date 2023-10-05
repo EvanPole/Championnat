@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChampionnatController;
 use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\JoueurController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::resource('championnat', ChampionnatController::class);
 
 Route::resource('equipe', EquipeController::class);
+
+Route::resource('joueur', JoueurController::class);
 
 Route::get('/', function () {
     return redirect('championnat');
