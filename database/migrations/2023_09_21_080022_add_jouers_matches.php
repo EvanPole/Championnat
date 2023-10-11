@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sexe');
             $table->foreignIdFor(Equipe::class);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('matches', function (Blueprint $table) {
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->integer('but_visiteur');
             $table->dateTime('date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

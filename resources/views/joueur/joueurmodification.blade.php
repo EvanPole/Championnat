@@ -1,7 +1,7 @@
 @extends('layout.navbar')
+
 @section('content')
     <div class="container mt-5">
-        {{-- <a class="btn btn-success" href="{{ route('championnat.index') }}">retour</a> --}}
         <h1 class="mb-4 text-center">Modification des informations d'un joueur</h1>
 
         <div class="card shadow-lg" style="border: 2px solid #673AB7;">
@@ -41,6 +41,13 @@
                                     <option value="{{ $equipe->id }}">{{ $equipe->ville }}</option>
                                 @endif
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sexe">Sexe du joueur:</label>
+                        <select class="form-control" name="sexe" id="sexe">
+                            <option value="0" @if ($joueur->sexe == 0) selected @endif>Homme</option>
+                            <option value="1" @if ($joueur->sexe == 1) selected @endif>Femme</option>
                         </select>
                     </div>
 

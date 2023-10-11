@@ -14,21 +14,20 @@ class JoueurController extends Controller
     public function index()
     {
         $equipes = Equipe::all();
-
         $eqjoueurs = [];
 
         foreach ($equipes as $equipe) {
             $joueursEquipe = Joueur::where('equipe_id', $equipe->id)->get();
-            if ($joueursEquipe->isNotEmpty()) {
-                $eqjoueurs[] = [
-                    'equipe' => $equipe,
-                    'joueurs' => $joueursEquipe,
-                ];
-            }
+
+            $eqjoueurs[] = [
+                'equipe' => $equipe,
+                'joueurs' => $joueursEquipe,
+            ];
         }
 
         return view('joueur.joueurliste', compact('eqjoueurs'));
     }
+
 
 
     /**
@@ -78,6 +77,7 @@ class JoueurController extends Controller
             'email' => 'required|email',
             'tel' => 'required',
             'equipe_id' => 'required',
+            'sexe' => 'required|in:0,1',
         ]);
 
         $joueur->nom = $request->nom;
@@ -85,11 +85,13 @@ class JoueurController extends Controller
         $joueur->email = $request->email;
         $joueur->tel = $request->tel;
         $joueur->equipe_id = $request->equipe_id;
+        $joueur->sexe = $request->sexe;
 
         $joueur->save();
 
         return redirect()->route('joueur.index');
     }
+
 
 
     /**

@@ -17,6 +17,7 @@
                                     <th>Prénom</th>
                                     <th>Téléphone</th>
                                     <th>Email</th>
+                                    <th>Sexe</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -28,12 +29,22 @@
                                         <td>{{ $joueur->tel }}</td>
                                         <td>{{ $joueur->email }}</td>
                                         <td>
-                                            <form method="POST" action="{{ route('joueur.destroy', ['joueur' => $joueur->id]) }}">
+                                            @if ($joueur->sexe == 0)
+                                                Homme
+                                            @elseif ($joueur->sexe == 1)
+                                                Femme
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <form method="POST"
+                                                action="{{ route('joueur.destroy', ['joueur' => $joueur->id]) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="btn-group">
-                                                    <input type="submit" class="btn btn-danger delete-user" value="Supprimer">
-                                                    <a class="btn btn-secondary" href="{{ route('joueur.edit', ['joueur' => $joueur->id]) }}">Éditer</a>
+                                                    <input type="submit" class="btn btn-danger delete-user"
+                                                        value="Supprimer">
+                                                    <a class="btn btn-secondary"
+                                                        href="{{ route('joueur.edit', ['joueur' => $joueur->id]) }}">Éditer</a>
                                                 </div>
                                             </form>
                                         </td>
@@ -41,7 +52,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <a class="btn btn-success" href="{{ route('equipe.create') }}">Ajouter un joueur</a>
+                        <a class="btn btn-success" href="{{ route('joueur.create') }}">Ajouter un joueur</a>
                     </div>
                 </div>
             @endforeach
