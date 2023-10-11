@@ -1,24 +1,43 @@
 @extends('layout.navbar')
 @section('content')
-    <h2>Liste des joueurs de l'equipe</h2>
-    @forelse ($equipe as $equipes)
-    <h1>{{ $equipes->ville }}</h1>
-        @forelse ($joueur as $joueurs)
-            @if ($equipes->id == $joueurs->equipe_id)
-                <div>
-                    <p>Nom du joueur : {{ $joueurs->nom }} {{ $joueurs->prenom }} [ {{ $joueurs->tel }} ] mail :
-                        {{ $joueurs->email }}</p>
+    <div class="container mt-5">
+        <h1 class="text-center">Liste des joueurs par équipe</h1>
+        @forelse ($equipe as $equipes)
+            <h2>{{ $equipes->ville }}</h2>
+            @php
+                $joueursEquipe = $joueur->where('equipe_id', $equipes->id);
+            @endphp
+            @if ($joueursEquipe->isNotEmpty())
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="table-primary">
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Téléphone</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($joueursEquipe as $joueurEquipe)
+                            <tr>
+                                <td>{{ $joueurEquipe->nom }}</td>
+                                <td>{{ $joueurEquipe->prenom }}</td>
+                                <td>{{ $joueurEquipe->tel }}</td>
+                                <td>{{ $joueurEquipe->email }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="alert alert-secondary" role="alert">
+                    Désolé, il n'y a pas de joueurs dans cette équipe !
                 </div>
             @endif
         @empty
             <div class="alert alert-secondary" role="alert">
-                Désolé, il n'y a pas de joueurs !
+                Aucune équipe disponible.
             </div>
         @endforelse
-
-
-    @empty
-        ee
-    @endforelse
-    <a class="btn btn-success" href="{{ route('equipe.create') }}">Ajouter un joueur</a>
+        <a class="btn btn-success" href="{{ route('equipe.create') }}">Ajouter un joueur</a>
+    </div>
 @endsection
