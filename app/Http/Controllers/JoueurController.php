@@ -13,12 +13,23 @@ class JoueurController extends Controller
      */
     public function index()
     {
-        $equipe = Equipe::all();
-        $joueur = Joueur::all();
+        $equipes = Equipe::all();
 
-        return view('joueur.joueurliste', compact('equipe', 'joueur'));
+        $eqjoueurs = [];
 
+        foreach ($equipes as $equipe) {
+            $joueursEquipe = Joueur::where('equipe_id', $equipe->id)->get();
+            if ($joueursEquipe->isNotEmpty()) {
+                $eqjoueurs[] = [
+                    'equipe' => $equipe,
+                    'joueurs' => $joueursEquipe,
+                ];
+            }
+        }
+
+        return view('joueur.joueurliste', compact('eqjoueurs'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,7 +60,9 @@ class JoueurController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $joueur = Joueur::Find($id);
+        $equipes = Equipe::all();
+        return view('joueur.joueurmodification', compact('joueur','equipes'));
     }
 
     /**
@@ -57,14 +70,41 @@ class JoueurController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $joueur = Joueur::find($id);
+
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'email' => 'required|email',
+            'tel' => 'required',
+            'equipe_id' => 'required',
+        ]);
+
+        $joueur->nom = $request->nom;
+        $joueur->prenom = $request->prenom;
+        $joueur->email = $request->email;
+        $joueur->tel = $request->tel;
+        $joueur->equipe_id = $request->equipe_id;
+
+        $joueur->save();
+
+        return redirect()->route('joueur.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $joueur = Joueur::find($id);
+
+        if (!$joueur) {
+            return redirect()->route('joueur.index');
+        }
+
+        $joueur->delete();
+
+        return redirect()->route('joueur.index');
     }
 }

@@ -1,19 +1,52 @@
 @extends('layout.navbar')
 @section('content')
-    {{-- <a class="btn btn-success" href="{{ route('championnat.index') }}">retour</a> --}}
-    <h1>Modification des informationq de l'joueur</h1>
+    <div class="container mt-5">
+        {{-- <a class="btn btn-success" href="{{ route('championnat.index') }}">retour</a> --}}
+        <h1 class="mb-4 text-center">Modification des informations d'un joueur</h1>
 
-    <form action="{{ route('joueur.update', ['joueur' => $joueur->id]) }}" method="POST">
-        @csrf
-        @method('put')
-        <input type="text" name="ville" id="" value="{{ $joueur->ville }}" placeholder="Ville de l'joueur">
-        <input type="text" name="categorie" id="" value="{{ $joueur->categorie }}"
-            placeholder="Categorie de l'joueur">
-        <input type="text" name="championnat" id="" value="{{ $joueur->championnat }}"
-            placeholder="championnat de l'joueur">
-        <input class="btn btn-success" type="submit" value="save">
-        <option value="">
-            <select name="" id=""></select>
-        </option>
-    </form>
+        <div class="card shadow-lg" style="border: 2px solid #673AB7;">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Joueur : {{ $joueur->nom }} {{ $joueur->prenom }}</h5>
+
+                <form action="{{ route('joueur.update', ['joueur' => $joueur->id]) }}" method="POST">
+                    @csrf
+                    @method('put')
+                    <div class="form-group">
+                        <label for="nom">Nom du joueur:</label>
+                        <input type="text" class="form-control" name="nom" id="nom" value="{{ $joueur->nom }}"
+                            placeholder="Nom du joueur">
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prénom du joueur:</label>
+                        <input type="text" class="form-control" name="prenom" id="prenom" value="{{ $joueur->prenom }}"
+                            placeholder="Prénom du joueur">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email du joueur:</label>
+                        <input type="email" class="form-control" name="email" id="email" value="{{ $joueur->email }}"
+                            placeholder="Email du joueur">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">Téléphone du joueur:</label>
+                        <input type="tel" class="form-control" name="tel" id="tel" value="{{ $joueur->tel }}"
+                            placeholder="Téléphone du joueur">
+                    </div>
+                    <div class="form-group">
+                        <label for="equipe_id">Équipe du joueur:</label>
+                        <select class="form-control" name="equipe_id" id="equipe_id">
+                            @foreach ($equipes as $equipe)
+                                @if ($equipe->id === $joueur->equipe_id)
+                                    <option value="{{ $equipe->id }}" selected>{{ $equipe->ville }}</option>
+                                @else
+                                    <option value="{{ $equipe->id }}">{{ $equipe->ville }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button class="btn btn-success btn-block" type="submit">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
