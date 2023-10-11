@@ -33,18 +33,44 @@ class JoueurController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
-        //
+        $equipes = Equipe::all();
+        return view('joueur.joueurcreate', compact('equipes'));
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     */
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'email' => 'required|email',
+            'tel' => 'required',
+            'equipe_id' => 'required',
+            'sexe' => 'required|in:0,1',
+        ]);
+
+        $joueur = new Joueur();
+        $joueur->nom = $request->nom;
+        $joueur->prenom = $request->prenom;
+        $joueur->email = $request->email;
+        $joueur->tel = $request->tel;
+        $joueur->equipe_id = $request->equipe_id;
+        $joueur->sexe = $request->sexe;
+
+        $joueur->save();
+
+        return redirect()->route('joueur.index')->with('success', 'Le joueur a été créé avec succès.');
     }
+
 
     /**
      * Display the specified resource.
@@ -61,7 +87,7 @@ class JoueurController extends Controller
     {
         $joueur = Joueur::Find($id);
         $equipes = Equipe::all();
-        return view('joueur.joueurmodification', compact('joueur','equipes'));
+        return view('joueur.joueurmodification', compact('joueur', 'equipes'));
     }
 
     /**

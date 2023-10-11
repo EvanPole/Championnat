@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <h1 class="mb-4 text-center">Modification des informations d'un joueur</h1>
 
-        <div class="card shadow-lg" style="border: 2px solid #673AB7;">
+        <div class="card shadow-lg">
             <div class="card-body">
                 <h5 class="card-title text-primary">Joueur : {{ $joueur->nom }} {{ $joueur->prenom }}</h5>
 
