@@ -85,9 +85,9 @@ class EquipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Equipe $equipe)
     {
-        //
+        return view('equipe.equipeshow', compact('equipe'));
     }
 
     /**
@@ -123,10 +123,8 @@ class EquipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Equipe $equipe)
     {
-        $equipe = Equipe::findOrFail($id);
-
         $equipe->delete();
 
         return redirect()->route('equipe.index');

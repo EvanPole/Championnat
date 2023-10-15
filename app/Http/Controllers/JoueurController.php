@@ -75,9 +75,10 @@ class JoueurController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Joueur $joueur)
     {
-        //
+        return view('joueur.joueurshow', compact('joueur'));
+
     }
 
     /**
@@ -123,16 +124,9 @@ class JoueurController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Joueur $joueur)
     {
-        $joueur = Joueur::find($id);
-
-        if (!$joueur) {
+            $joueur->delete();
             return redirect()->route('joueur.index');
-        }
-
-        $joueur->delete();
-
-        return redirect()->route('joueur.index');
     }
 }

@@ -43,6 +43,8 @@
                                                 <div class="btn-group">
                                                     <input type="submit" class="btn btn-danger delete-user"
                                                         value="Supprimer">
+                                                        <a class="btn btn-primary"
+                                                        href="{{ route('joueur.show', ['joueur' => $joueur->id]) }}">Info</a>
                                                     <a class="btn btn-secondary"
                                                         href="{{ route('joueur.edit', ['joueur' => $joueur->id]) }}">Éditer</a>
                                                 </div>

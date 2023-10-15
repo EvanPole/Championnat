@@ -27,6 +27,7 @@
                                 {{ method_field('DELETE') }}
                                 <div class="btn-group">
                                     <input type="submit" class="btn btn-danger delete-user" value="Supprimer">
+                                    <a class="btn btn-primary" href="{{ route('equipe.show', ['equipe' => $equipes->id]) }}">Info</a>
                                     <a class="btn btn-secondary" href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">Éditer</a>
                                 </div>
                             </form>
