@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipe;
+use App\Models\Joueur;
+use App\Models\Matche;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
@@ -9,11 +12,20 @@ class MatchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Equipe $equipe, Matche $matche)
     {
-        //
-    }
+        $match = Matche::all();
+        $equipe = Equipe::all();
 
+        $playerCounts = [];
+
+        foreach ($equipe as $equipes) {
+            $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
+            $playerCounts[$equipes->id] = $playerCount;
+        }
+
+        return view('match.matchliste', compact('equipe', 'match', 'playerCounts'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -33,9 +45,11 @@ class MatchController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Matche $match)
     {
-        //
+        $equipe = Equipe::all();
+
+        return view('match.matchshow', compact('equipe', 'match'));
     }
 
     /**
@@ -57,8 +71,9 @@ class MatchController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Matche $match)
     {
-        //
+        $match->delete();
+        return redirect()->route('match.index');
     }
 }

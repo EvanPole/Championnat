@@ -30,7 +30,7 @@
                         <a class="nav-link" href="{{ route('joueur.index') }}">Joueurs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Matches</a>
+                        <a class="nav-link" href="{{ route('match.index') }}">Matches</a>
                     </li>
                 </ul>
             </div>
