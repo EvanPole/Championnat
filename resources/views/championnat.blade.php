@@ -1,42 +1,28 @@
 @extends('layout.navbar')
+
 @section('content')
-
-    <h1 class="text-center">Matches</h1>
-    <div class="table-responsive m-5">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr class="bg-primary text-white">
-                    <th scope="col">Domicile</th>
-                    <th scope="col">Visiteur</th>
-                    <th scope="col">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($matche as $matches)
-                    <tr>
+    <div class="container mt-5">
+        <h1 class="text-center">Matches à venir</h1>
+        <div class="table-responsive m-5">
+            <h2>Match à venir</h2>
+            <ul class="list-group">
+                @foreach ($match as $matchs)
+                    <li class="list-group-item">
                         @foreach ($equipe as $equipes)
-                            @if ($matches->domicile == $equipes->id)
-                                <td>{{ $equipes->ville }}</td>
+                            @if ($equipes->id == $matchs->visiteur)
+                                <span class="badge bg-primary">{{$equipes->ville}}</span>
                             @endif
                         @endforeach
+                        <span >-</span>
                         @foreach ($equipe as $equipes)
-                            @if ($matches->visiteur == $equipes->id)
-                                <td>{{ $equipes->ville }}</td>
+                            @if ($equipes->id == $matchs->domicile)
+                                <span class="badge bg-primary">{{$equipes->ville}}</span>
                             @endif
                         @endforeach
-                        <td>{{ $matches->date }}</td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3">
-                            <div class="alert alert-secondary" role="alert">
-                                Ha, Flut il n'y a pas de matches !
-                            </div>
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                        <span class="badge bg-info">Date : {{ $matchs->date }}</span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
-
 @endsection

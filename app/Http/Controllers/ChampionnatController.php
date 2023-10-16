@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
@@ -9,19 +8,13 @@ use Illuminate\Http\Request;
 
 class ChampionnatController extends Controller
 {
-
-    public function index(Equipe $equipe, Matche $matche)
+    public function index()
     {
-        $matche = Matche::all();
+        $currentDate = now();
+        $match = Matche::where('date', '>', $currentDate)->get();
         $equipe = Equipe::all();
 
-        $playerCounts = [];
-
-        foreach ($equipe as $equipes) {
-            $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
-            $playerCounts[$equipes->id] = $playerCount;
-        }
-
-        return view('championnat', compact('equipe', 'matche', 'playerCounts'));
+        return view('championnat', compact('match','equipe'));
     }
+
 }

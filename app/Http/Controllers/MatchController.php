@@ -31,7 +31,8 @@ class MatchController extends Controller
      */
     public function create()
     {
-        //
+        $equipes = Equipe::all();
+        return view('match.matchcreate', compact('equipes'));
     }
 
     /**
@@ -39,7 +40,12 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $match = new Matche();
+        $match->visiteur = $request->equipe2;
+        $match->domicile = $request->equipe1;
+        $match->date = $request->date;
+        $match->save();
+        return redirect()->route('match.index');
     }
 
     /**
@@ -55,9 +61,11 @@ class MatchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Matche $match)
     {
-        //
+        $equipes = Equipe::all();
+
+        return view('match.matchmodification', compact('equipes', 'match'));
     }
 
     /**
@@ -65,7 +73,14 @@ class MatchController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $match = Matche::Find($id);
+        $match->visiteur = $request->equipe2;
+        $match->domicile = $request->equipe1;
+        $match->date = $request->date;
+        $match->but_domicile = $request->but1;
+        $match->but_visiteur = $request->but2;
+        $match->save();
+        return redirect()->route('match.index');
     }
 
     /**

@@ -10,23 +10,23 @@
                     @csrf
                     <div class="form-group">
                         <label for="nom">Nom du joueur:</label>
-                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom du joueur">
+                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom du joueur" required maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="prenom">Prénom du joueur:</label>
-                        <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom du joueur">
+                        <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom du joueur" required maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="email">Email du joueur:</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email du joueur">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email du joueur" required maxlength="100">
                     </div>
                     <div class="form-group">
                         <label for="tel">Téléphone du joueur:</label>
-                        <input type="tel" class="form-control" name="tel" id="tel" placeholder="Téléphone du joueur">
+                        <input type="tel" class="form-control" name="tel" id="tel" placeholder="Téléphone du joueur" required>
                     </div>
                     <div class="form-group">
                         <label for="equipe_id">Équipe du joueur:</label>
-                        <select class="form-control" name="equipe_id" id="equipe_id">
+                        <select class="form-control" name="equipe_id" id="equipe_id" required>
                             @foreach ($equipes as $equipe)
                                 <option value="{{ $equipe->id }}">{{ $equipe->ville }}</option>
                             @endforeach
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sexe">Sexe du joueur:</label>
-                        <select class="form-control" name="sexe" id="sexe">
+                        <select class="form-control" name="sexe" id="sexe" required>
                             <option value="0">Homme</option>
                             <option value="1">Femme</option>
                         </select>
