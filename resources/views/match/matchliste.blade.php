@@ -59,7 +59,7 @@
             @endforelse
         </tbody>
     </table>
-    <a href="{{ route('match.create')}}">Ajouter un match</a>
+    <a class="btn btn-success" href="{{ route('match.create')}}">Ajouter un match</a>
 </div>
 
 @endsection
