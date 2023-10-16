@@ -27,7 +27,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="championnat">Date du match:</label>
-                                <input type="datetime-local" class="form-control" name="date" id="date" placeholder="Date">
+                                <input type="date" class="form-control" name="date" id="date" placeholder="Date">
                             </div>
                             <button class="btn btn-success" type="submit">Enregistrer</button>
                         </form>

@@ -40,13 +40,21 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'equipe1' => 'required',
+            'equipe2' => 'required',
+            'date' => 'required|date',
+        ]);
+
         $match = new Matche();
         $match->visiteur = $request->equipe2;
         $match->domicile = $request->equipe1;
         $match->date = $request->date;
         $match->save();
+
         return redirect()->route('match.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -73,6 +81,15 @@ class MatchController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate([
+            'equipe1' => 'required',
+            'equipe2' => 'required',
+            'date' => 'required|date',
+            'but1' => 'nullable|integer',
+            'but2' => 'nullable|integer',
+        ]);
+
         $match = Matche::Find($id);
         $match->visiteur = $request->equipe2;
         $match->domicile = $request->equipe1;

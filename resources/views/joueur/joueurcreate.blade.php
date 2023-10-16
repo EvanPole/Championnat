@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tel">Téléphone du joueur:</label>
-                        <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="tel" id="tel" placeholder="Téléphone du joueur" required>
+                        <input type="tel" class="form-control" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" name="tel" id="tel" placeholder="Téléphone du joueur" required>
                     </div>
                     <div class="form-group">
                         <label for="equipe_id">Équipe du joueur:</label>

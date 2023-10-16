@@ -124,7 +124,7 @@ class EquipeController extends Controller
         $equipe->championnat = $validatedData['championnat'];
         $equipe->save();
 
-        return redirect()->route('championnat.index');
+        return redirect()->route('equipe.index');
     }
 
 
